@@ -28,9 +28,9 @@ If you don't have a `site` key, [click here](https://developers.google.com/recap
 Then you must show the widget using the `widget` function directly on the template:
 
 ```php
-	if ( class_exists('ReCaptcha') ) {
-		ReCaptcha::widget();
-	}
+if ( class_exists('ReCaptcha') ) {
+	ReCaptcha::widget();
+}
 ```
 
 _Tip: It is recommended that you check for the class before trying to use it, just in case the plugin had been disabled._
@@ -38,16 +38,16 @@ _Tip: It is recommended that you check for the class before trying to use it, ju
 Once the widget is being shown, check the response on you form processing logic using the `validate` function:
 
 ```php
-	if ( class_exists('ReCaptcha') ) {
-		$recaptcha = get_item($_POST, 'g-recaptcha-response');
-		$valid = ReCaptcha::validate($recaptcha);
-		if (! $valid ) {
-			// Not valid, abort processing
-			echo 'You ARE a robot';
-			die();
-		}
+if ( class_exists('ReCaptcha') ) {
+	$recaptcha = get_item($_POST, 'g-recaptcha-response');
+	$valid = ReCaptcha::validate($recaptcha);
+	if (! $valid ) {
+		// Not valid, abort processing
+		echo 'You ARE a robot';
+		die();
 	}
-	// Otherwise continue as normal
+}
+// Otherwise continue as normal
 ```
 
 As simple as that.
