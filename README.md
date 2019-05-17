@@ -8,7 +8,7 @@ This is a very simple integration plugin for WordPress, to make it easy for deve
 
 With this plugin you will have to manually add the widget where you want it to be shown _and_ validate the response on the appropiate place.
 
-So, as you may have guessed, this is not an automagic plugin that add reCAPTCHA into all of WP forms (comments, login, etc). This is a plugin for developers who want to easily output a reCAPTCHA widget and then validate its response, knowing what they are doing.
+So, as you may have guessed, this is not an automagic plugin that adds reCAPTCHA into all of WP forms (comments, login, etc). This is a plugin for developers who want to easily output a reCAPTCHA widget and then validate its response, knowing what they are doing.
 
 ## Requirements
 
