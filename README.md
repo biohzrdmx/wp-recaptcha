@@ -63,6 +63,16 @@ You may customize the default widget by passing some parameters to the ```widget
 - `expired-callback` - Callback for expired widget
 - `error-callback` - Callback for error
 
+For example:
+
+```php
+if ( class_exists('ReCaptcha') ) {
+	$params = [];
+	$params['theme'] = 'dark';
+	ReCaptcha::widget($params);
+}
+```
+
 You can find more info here: https://developers.google.com/recaptcha/docs/display#render_param
 
 ## Troubleshooting
