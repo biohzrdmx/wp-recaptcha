@@ -17,7 +17,7 @@ So, as you may have guessed, this is not an automagic plugin that adds reCAPTCHA
 
 ## Installation
 
-Clone/download the repo and install the plugin by unziping the contents of the zip into the `wp-content/plugins` folder of your WP installation and activate it through the WordPress admin dashboard.
+Clone/download the repo and install the plugin by unziping the contents of the zip into the `wp-content/plugins` folder of your WP installation, rename the resulting folder to `wp-recaptcha` and activate it through the WordPress admin dashboard.
 
 Once installed you will see a 'reCAPTCHA' entry on the left-side menu, click it and you will see the options page. There you will require to set the `site` and `secret` keys.
 
