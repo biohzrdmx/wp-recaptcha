@@ -29,7 +29,7 @@
 			public static function adminSettingsLink($links, $file) {
 				$folder = dirname( plugin_basename(__FILE__) );
 				$links = (array) $links;
-				if ( $file === "{$folder}/plugin.php" && current_user_can( 'manage_options' ) ) {
+				if ( $file === "{$folder}/recaptcha.php" && current_user_can( 'manage_options' ) ) {
 					$url = admin_url('admin.php?page=recaptcha');
 					$link = sprintf( '<a href="%s">%s</a>', $url, __( 'Settings', 'recaptcha' ) );
 					array_unshift($links, $link);
@@ -46,16 +46,6 @@
 				add_settings_section( 'recaptcha_settings', __( 'General settings', 'recaptcha' ), 'reCAPTCHA::callbackSettings', 'recaptcha' );
 				add_settings_field( 'recaptcha_field_site', __('Site key', 'recaptcha'), 'reCAPTCHA::fieldText', 'recaptcha', 'recaptcha_settings', [ 'label_for' => 'recaptcha_field_site', 'class' => 'recaptcha_row' ]);
 				add_settings_field( 'recaptcha_field_secret', __('Secret key', 'recaptcha'), 'reCAPTCHA::fieldText', 'recaptcha', 'recaptcha_settings', [ 'label_for' => 'recaptcha_field_secret', 'class' => 'recaptcha_row' ] );
-			}
-
-			public static function adminSettingsLink($links, $file) {
-				$links = (array) $links;
-				if ( $file === 'wp-recaptcha/recaptcha.php' && current_user_can( 'manage_options' ) ) {
-					$url = admin_url('admin.php?page=recaptcha');
-					$link = sprintf( '<a href="%s">%s</a>', $url, __( 'Settings', 'recaptcha' ) );
-					array_unshift($links, $link);
-				}
-				return $links;
 			}
 
 			public static function fieldText($args) {
