@@ -1,11 +1,13 @@
 <?php
-	/*
-	Plugin Name: reCAPTCHA
-	Plugin URI: github.com/biohzrdmx/wp-recaptcha
-	Version: 1.0
-	Author: biohzrdmx
-	Description: Simple Google reCAPTCHA plugin for WordPress
-	*/
+	/**
+	 * Plugin Name: reCAPTCHA
+	 * Plugin URI: github.com/biohzrdmx/wp-recaptcha
+	 * Version: 1.5
+	 * Author: biohzrdmx
+	 * Description: Simple Google reCAPTCHA plugin for WordPress
+	 * Plugin URI: http://github.com/biohzrdmx/
+	 * Author URI: http://github.com/biohzrdmx/wp-recaptcha
+	 */
 
 	if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -13,10 +15,26 @@
 
 		class reCAPTCHA {
 
+			public static function init() {
+				$folder = dirname( plugin_basename(__FILE__) );
+				$ret = load_plugin_textdomain('recaptcha', false, "{$folder}/lang");
+			}
+
 			public static function actionHead() {
 				$dir = plugin_dir_url(__FILE__);
 				wp_enqueue_script( 'recaptcha-js', "{$dir}plugin.js", ['jquery'], '1.0', true );
 				wp_enqueue_script( 'recaptcha', 'https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha', [], '1.0', true );
+			}
+
+			public static function adminSettingsLink($links, $file) {
+				$folder = dirname( plugin_basename(__FILE__) );
+				$links = (array) $links;
+				if ( $file === "{$folder}/plugin.php" && current_user_can( 'manage_options' ) ) {
+					$url = admin_url('admin.php?page=recaptcha');
+					$link = sprintf( '<a href="%s">%s</a>', $url, __( 'Settings', 'recaptcha' ) );
+					array_unshift($links, $link);
+				}
+				return $links;
 			}
 
 			public static function actionAdminMenu() {
@@ -61,7 +79,7 @@
 
 			public static function callbackSettings() {
 				?>
-					<p><?php esc_html_e('Configure here your reCAPTCHA parameters.'); ?> <?php esc_html_e('Don\'t have a site key?'); ?> <a href="https://developers.google.com/recaptcha/" target="_blank"><?php esc_html_e('Click here to get one.') ?></a></p>
+					<p><?php esc_html_e('Configure here your reCAPTCHA parameters.', 'recaptcha'); ?> <?php esc_html_e('Don\'t have a site key?', 'recaptcha'); ?> <a href="https://developers.google.com/recaptcha/" target="_blank"><?php esc_html_e('Click here to get one.', 'recaptcha'); ?></a></p>
 				<?php
 			}
 
@@ -110,12 +128,13 @@
 				}
 				return $ret;
 			}
-
 		}
 
+		add_action( 'init', 'reCAPTCHA::init' );
 		add_action( 'wp_head', 'reCAPTCHA::actionHead' );
 		add_action( 'admin_init', 'reCAPTCHA::actionAdminInit' );
 		add_action( 'admin_menu', 'reCAPTCHA::actionAdminMenu' );
+		add_filter( 'plugin_action_links', 'reCAPTCHA::adminSettingsLink', 10, 5 );
 
 	}
 
