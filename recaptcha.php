@@ -5,8 +5,8 @@
 	 * Version: 1.5
 	 * Author: biohzrdmx
 	 * Description: Simple Google reCAPTCHA plugin for WordPress
-	 * Plugin URI: http://github.com/biohzrdmx/
-	 * Author URI: http://github.com/biohzrdmx/wp-recaptcha
+	 * Plugin URI: http://github.com/biohzrdmx/wp-recaptcha
+	 * Author URI: http://github.com/biohzrdmx/
 	 */
 
 	if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -100,7 +100,7 @@
 					$attrs .= "data-{$attr}=\"{$value}\" ";
 				}
 				$attrs = rtrim($attrs);
-				$ret = "<div data=\"recaptcha\" {$attrs}></div>";
+				$ret = "<div class=\"recaptcha\" data-widget=\"recaptcha\" {$attrs}></div>";
 				if ($echo) echo $ret;
 				return $ret;
 			}
